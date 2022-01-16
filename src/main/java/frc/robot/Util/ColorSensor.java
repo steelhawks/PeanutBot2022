@@ -1,21 +1,29 @@
 package frc.robot.Util;
 
 import edu.wpi.first.wpilibj.shuffleboard.*;
+import edu.wpi.first.networktables.NetworkTableEntry;
 
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj.I2C;
+
 import com.revrobotics.ColorSensorV3;
 import com.revrobotics.ColorMatchResult;
 import com.revrobotics.ColorMatch;
 
 public class ColorSensor {
 
-    ShuffleboardTab tab = Shuffleboard.getTab("colors");
+    ShuffleboardTab tab;
+    private NetworkTableEntry red;
+    private NetworkTableEntry green;
+    private NetworkTableEntry blue;
+    private NetworkTableEntry confidence;
+    private NetworkTableEntry colorfound;
+
 
     //color sensor testing
-    private final I2C.Port i2cPort = I2C.Port.kOnboard;
-    private final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
-    private final ColorMatch m_colorMatcher = new ColorMatch();
+    private final I2C.Port i2cPort;
+    private final ColorSensorV3 m_colorSensor;
+    private final ColorMatch m_colorMatcher;
     
     // private final Color kBlueTarget = ColorMatch.makeColor(0.143, 0.427, 0.429);
     // private final Color kGreenTarget = ColorMatch.makeColor(0.197, 0.561, 0.240);
@@ -33,7 +41,20 @@ public class ColorSensor {
     
 
     //constructor
-    public ColorSensor(){}
+    public ColorSensor(){
+
+      this.tab = Shuffleboard.getTab("colors");
+
+      this.red = tab.add("Red", 0).getEntry();
+      this.green = tab.add("Green", 0).getEntry();
+      this.blue = tab.add("Blue", 0).getEntry();
+      this.confidence = tab.add("Confidence", 0).getEntry();
+      this.colorfound = tab.add("Detected Color", "").getEntry();
+
+      this.i2cPort = I2C.Port.kOnboard;
+      this.m_colorSensor = new ColorSensorV3(i2cPort);
+      this.m_colorMatcher = new ColorMatch();
+    }
 
     public void matchfixedcolors(){
             
@@ -45,10 +66,10 @@ public class ColorSensor {
     }
 
     public Color detectColor(){
-        detectedColor = m_colorSensor.getColor();
+        this.detectedColor = m_colorSensor.getColor();
 
         
-        match = m_colorMatcher.matchClosestColor(detectedColor);
+        this.match = m_colorMatcher.matchClosestColor(detectedColor);
     
         if (match.color == kBlueTarget) {
           colorString = "Blue";
@@ -65,14 +86,18 @@ public class ColorSensor {
         return detectedColor;
     }
     
-    public void colorShuffleBoard(Color color){
+    public void updatecolortable(){
 
-        detectedColor = color;
+      colorfound.setDefaultString("??????");
 
-        Shuffleboard.getTab("colors").add("Red", detectedColor.red);
-        Shuffleboard.getTab("colors").add("Green", detectedColor.green);
-        Shuffleboard.getTab("colors").add("Blue", detectedColor.blue);
-        Shuffleboard.getTab("colors").add("Confidence", match.confidence);
-        Shuffleboard.getTab("colors").add("Detected Color", colorString);
+      red.setDouble(detectedColor.red);
+      green.setDouble(detectedColor.green);
+      blue.setDouble(detectedColor.blue);
+      confidence.setDouble(match.confidence);
+      colorfound.setString(colorString);
     }
-}
+
+    }
+
+
+

@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.commands.*;
-//import edu.wpi.first.wpilibj.shuffleboard.*;
+import edu.wpi.first.wpilibj.shuffleboard.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.AnalogInput;
 
@@ -25,6 +25,8 @@ import com.revrobotics.ColorSensorV3;
 import com.revrobotics.ColorMatchResult;
 //import com.revrobotics.AnalogInput;
 import com.revrobotics.ColorMatch;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import frc.robot.Util.ColorSensor;
 
 public class Robot extends TimedRobot 
 {
@@ -39,6 +41,10 @@ public class Robot extends TimedRobot
 
 
   //color sensor testing
+
+  public static final ColorSensor COLOR_SENSOR = new ColorSensor();
+
+  /*
   private final I2C.Port i2cPort = I2C.Port.kOnboard;
   private final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
   private final ColorMatch m_colorMatcher = new ColorMatch();
@@ -52,8 +58,14 @@ public class Robot extends TimedRobot
   private final Color kGreenTarget = Color.kGreen;
   private final Color kRedTarget = Color.kRed;
   private final Color kYellowTarget = Color.kYellow;
-  //ShuffleboardTab tab = Shuffleboard.getTab("colors");
-
+  
+  ShuffleboardTab tab = Shuffleboard.getTab("colors");
+  private NetworkTableEntry red;
+  private NetworkTableEntry green;
+  private NetworkTableEntry blue;
+  private NetworkTableEntry confidence ;
+  private NetworkTableEntry colorfound ;
+  */
 
   //ultrasonic
   final AnalogInput ultrasonic = new AnalogInput(0);
@@ -80,12 +92,27 @@ public class Robot extends TimedRobot
 
     //colorsensortest
 
+    /*
     m_colorMatcher.addColorMatch(kBlueTarget);
     m_colorMatcher.addColorMatch(kGreenTarget);
     m_colorMatcher.addColorMatch(kRedTarget);
     m_colorMatcher.addColorMatch(kYellowTarget);
+
+    ShuffleboardTab tab = Shuffleboard.getTab("colors");
+    tab.add("Red", 0).getEntry();
+    tab.add("Green", 0).getEntry();
+    tab.add("Blue", 0).getEntry();
+    tab.add("Confidence", 0).getEntry();
+    tab.add("Detected Color", "").getEntry();
+    */
+
+    COLOR_SENSOR.matchfixedcolors();
+
+    //tab.add("currentDistanceCentimeters", currentDistanceCentimeters).getEntry();
+    //tab.add("currentDistanceInches", currentDistanceInches).getEntry();
     
     //ultrasonic testing
+
 
   }
 
@@ -93,7 +120,7 @@ public class Robot extends TimedRobot
   public void robotPeriodic() 
   {
     
-    
+    /*
     double raw_value = ultrasonic.getValue();
     //voltage_scale_factor allows us to compensate for differences in supply voltage.
     double voltage_scale_factor = 5/RobotController.getVoltage5V();
@@ -101,9 +128,9 @@ public class Robot extends TimedRobot
     double currentDistanceInches = raw_value * voltage_scale_factor * 0.0492;
     System.out.println(currentDistanceCentimeters + "cm");
     System.out.println(currentDistanceInches + "in");
+    */
 
-
-    //color
+    /*
     Color detectedColor = m_colorSensor.getColor();
 
     ColorMatchResult match = m_colorMatcher.matchClosestColor(detectedColor);
@@ -121,17 +148,25 @@ public class Robot extends TimedRobot
       colorString = "Unknown";
     }
 
-    // tab.add("Red", detectedColor.red);
-    // tab.add("Green", detectedColor.green);
-    // tab.add("Blue", detectedColor.blue);
-    // tab.add("Confidence", match.confidence);
-    // tab.add("Detected Color", colorString);
+    
+    red.setDouble(detectedColor.red);
+    green.setDouble(detectedColor.green);
+    blue.setDouble(detectedColor.blue);
+    confidence.setDouble(match.confidence);
+    colorfound.setString(colorString);
+    
+    
+
+      
     SmartDashboard.putNumber("Red", detectedColor.red);
     SmartDashboard.putNumber("Green", detectedColor.green);
     SmartDashboard.putNumber("Blue", detectedColor.blue);
     SmartDashboard.putNumber("Confidence", match.confidence);
     SmartDashboard.putString("Detected Color", colorString);
+    */
 
+    COLOR_SENSOR.detectColor();
+    COLOR_SENSOR.updatecolortable();
   }
 
   @Override
