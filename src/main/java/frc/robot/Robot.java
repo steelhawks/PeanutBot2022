@@ -19,7 +19,7 @@ import frc.robot.subsystems.SolenoidTesting;
 import frc.util.ColorSensor;
 import edu.wpi.first.wpilibj.AnalogInput;
 
-public class Robot extends TimedRobot 
+public class Robot extends TimedRobot //BRIAN WAS HERE
 {
   /*****
    * Robot Objects
@@ -34,6 +34,7 @@ public class Robot extends TimedRobot
   
   public static final StorageTest INTAKETEST = new StorageTest();
   public static final SolenoidTesting SOLENOID_TESTING = new SolenoidTesting();
+  String brian = "brian";
 
   //intake
   public static final Intake INTAKE = new Intake();
