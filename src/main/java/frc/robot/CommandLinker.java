@@ -8,6 +8,7 @@ import frc.robot.commands.*;
 import frc.robot.commands.Storage.StorageRollAll;
 import frc.robot.commands.Storage.StorageRollDown;
 import frc.robot.commands.Storage.StorageRollUp;
+import frc.robot.commands.intake.IntakeSpin;
 
 public class CommandLinker 
 {
@@ -38,6 +39,8 @@ public class CommandLinker
     Button INTAKE_ALL_BUTTON = new JoystickButton(this.DRIVE_JOYSTICK, 5);
     Button TOGGLE_SOLENOID = new JoystickButton(this.DRIVE_JOYSTICK, 6);
 
+    Button INTAKE_ROLLER = new JoystickButton(this.DRIVE_JOYSTICK, Robot.ROBOTMAP.getBayButton());
+
     Button Extend_SOLENOID = new JoystickButton(this.DRIVE_JOYSTICK, 11);
     Button Retract_SOLENOID = new JoystickButton(this.DRIVE_JOYSTICK, 12);
 
@@ -45,6 +48,8 @@ public class CommandLinker
     INTAKE_ROLLDOWN_BUTTON.whileHeld(new StorageRollDown(Robot.INTAKETEST));//.whenReleased(new IntakeStopDown());
     INTAKE_ROLLUP_BUTTON.whileHeld(new StorageRollUp(Robot.INTAKETEST));//.whenReleased(new IntakeStopUp());
     INTAKE_ALL_BUTTON.whileHeld(new StorageRollAll(Robot.INTAKETEST));
+
+    INTAKE_ROLLER.whileHeld(new IntakeSpin(Robot.INTAKE));
 
     TOGGLE_SOLENOID.whenPressed(new ToggleSolenoid());
     Extend_SOLENOID.whenPressed(new ExtendSolenoid());

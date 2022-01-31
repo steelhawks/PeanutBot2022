@@ -19,7 +19,7 @@ public class RobotMap
   
   //Left Motor Ports
   private final int RIGHT_MOTOR_PORT_DOWN = 6; //SHOULD BE 6
-  private final int LEFT_MOTOR_PORT_DOWN = 3;
+  private final int LEFT_MOTOR_PORT_DOWN = 4;
   
   //Music port
   public final int MUSIC_MOTOR_PORT = 10;//USING RIGHTDOWN
@@ -60,6 +60,12 @@ public class RobotMap
 
   //Light ports
   private final int LIGHT_PORT = 12;
+
+  //intake
+  public final int intakeMotorOnePort = 7;
+  public final int intakeSolOnPort = 6;
+  public final int intakeSolOffPort = 3;
+  public final double speedIntake = 1;
 
   /*****
    * Constructor methods

@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.StorageTest;
 //import frc.robot.subsystems.Music;
 import frc.robot.subsystems.SolenoidTesting;
@@ -34,12 +35,16 @@ public class Robot extends TimedRobot
   public static final StorageTest INTAKETEST = new StorageTest();
   public static final SolenoidTesting SOLENOID_TESTING = new SolenoidTesting();
 
+  //intake
+  public static final Intake INTAKE = new Intake();
+
   //color sensor testing
   public static final ColorSensor COLOR_SENSOR = new ColorSensor();
 
   //ultrasonic
   final AnalogInput ultrasonic = new AnalogInput(0);
-  
+
+ 
 
   @Override
   public void robotInit() 
