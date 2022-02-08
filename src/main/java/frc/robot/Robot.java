@@ -10,11 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.Drivetrain;
-import frc.robot.commands.*;
 import edu.wpi.first.wpilibj.AnalogInput;
-
-
-import frc.robot.Util.ColorSensor;
 
 public class Robot extends TimedRobot 
 {
@@ -25,11 +21,6 @@ public class Robot extends TimedRobot
   public static final Drivetrain DRIVETRAIN = new Drivetrain();
   public static final CommandLinker COMMAND_LINKER = new CommandLinker();
   public double count = -0.99;
-
-  //color sensor testing
-
-  public static final ColorSensor COLOR_SENSOR = new ColorSensor();
-
 
   //ultrasonic
   final AnalogInput ultrasonic = new AnalogInput(0);
@@ -52,9 +43,6 @@ public class Robot extends TimedRobot
 
     //colorsensortest
 
-
-    COLOR_SENSOR.matchfixedcolors();
-
     //tab.add("currentDistanceCentimeters", currentDistanceCentimeters).getEntry();
     //tab.add("currentDistanceInches", currentDistanceInches).getEntry();
     
@@ -76,11 +64,6 @@ public class Robot extends TimedRobot
     System.out.println(currentDistanceCentimeters + "cm");
     System.out.println(currentDistanceInches + "in");
     */
-
-    
-
-    COLOR_SENSOR.detectColor();
-    COLOR_SENSOR.updatecolortable();
   }
 
   @Override
