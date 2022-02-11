@@ -2,8 +2,9 @@
 package frc.robot.subsystems;
 
 import com.kauailabs.navx.frc.AHRS;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.CANSparkMax.IdleMode;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -16,10 +17,10 @@ import frc.robot.Robot;
 public class Drivetrain extends SubsystemBase
 {
   //SPARK MAX LEFT MOTORS
-  public final WPI_TalonSRX LEFT_M_ONE;
+  public final CANSparkMax LEFT_M_ONE;
   
   //SPARK MAX RIGHT MOTOR
-  public final WPI_TalonSRX RIGHT_M_ONE;
+  public final CANSparkMax RIGHT_M_ONE;
 
   //SPEED CONTROLLER GROUPS
   public final MotorControllerGroup LEFT_M_GROUP;
@@ -40,10 +41,10 @@ public class Drivetrain extends SubsystemBase
   public Drivetrain() 
   {
     //SPARK MAX LEFT MOTORS
-    this.LEFT_M_ONE = new WPI_TalonSRX(Robot.ROBOTMAP.getLeftMotorPortOne());
+    this.LEFT_M_ONE = new CANSparkMax(Robot.ROBOTMAP.getLeftMotorPortOne(), MotorType.kBrushless);
     
     //SPARK MAX RIGHT MOTORS
-    this.RIGHT_M_ONE = new WPI_TalonSRX(Robot.ROBOTMAP.getRightMotorPortOne());
+    this.RIGHT_M_ONE = new CANSparkMax(Robot.ROBOTMAP.getRightMotorPortOne(), MotorType.kBrushless);
 
     //SPEED CONTROLLER GROUPS
     this.LEFT_M_GROUP = new MotorControllerGroup(this.LEFT_M_ONE);
@@ -121,11 +122,11 @@ public class Drivetrain extends SubsystemBase
   }
 
   public void configureMotors() {
-    this.LEFT_M_ONE.configFactoryDefault();
-    this.RIGHT_M_ONE.configFactoryDefault();
+    this.LEFT_M_ONE.restoreFactoryDefaults();
+    this.RIGHT_M_ONE.restoreFactoryDefaults();
 
-    this.LEFT_M_ONE.setNeutralMode(NeutralMode.Coast);
-    this.RIGHT_M_ONE.setNeutralMode(NeutralMode.Coast);
+    this.LEFT_M_ONE.setIdleMode(IdleMode.kCoast);
+    this.RIGHT_M_ONE.setIdleMode(IdleMode.kCoast);
   }
 
 
