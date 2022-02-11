@@ -14,10 +14,14 @@ public class RobotMap
    *****/
 
   //Right Motor Ports
-  private final int RIGHT_MOTOR_PORT_ONE = 0;
-
+  public final int LeftMotorPortOne = 1;
+  public final int LeftMotorPortTwo = 2;
+  public final int LeftMotorPortThree = 3;
+  
   //Left Motor Ports
-  private final int LEFT_MOTOR_PORT_ONE = 1;
+  public final int RightMotorPortOne = 4;
+  public final int RightMotorPortTwo = 5;
+  public final int RightMotorPortThree = 6;
 
   //Optical Encoder Ports
   private final int LEFT_ENC_PORT_A = 0;
@@ -60,17 +64,6 @@ public class RobotMap
   /*****
    * Getter methods
    *****/
-
-
-  public int getRightMotorPortOne()
-  {
-    return this.RIGHT_MOTOR_PORT_ONE;
-  }
-
-  public int getLeftMotorPortOne()
-  {
-    return this.LEFT_MOTOR_PORT_ONE;
-  }
 
   public int getLeftEncPortA()
   {

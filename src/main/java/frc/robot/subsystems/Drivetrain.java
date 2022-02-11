@@ -2,6 +2,7 @@
 package frc.robot.subsystems;
 
 import com.kauailabs.navx.frc.AHRS;
+
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.CANSparkMax.IdleMode;
@@ -18,9 +19,14 @@ public class Drivetrain extends SubsystemBase
 {
   //SPARK MAX LEFT MOTORS
   public final CANSparkMax LEFT_M_ONE;
+  public final CANSparkMax LEFT_M_TWO;
+  public final CANSparkMax LEFT_M_THREE;
   
   //SPARK MAX RIGHT MOTOR
   public final CANSparkMax RIGHT_M_ONE;
+  public final CANSparkMax RIGHT_M_TWO;
+  public final CANSparkMax RIGHT_M_THREE;
+
 
   //SPEED CONTROLLER GROUPS
   public final MotorControllerGroup LEFT_M_GROUP;
@@ -41,14 +47,19 @@ public class Drivetrain extends SubsystemBase
   public Drivetrain() 
   {
     //SPARK MAX LEFT MOTORS
-    this.LEFT_M_ONE = new CANSparkMax(Robot.ROBOTMAP.getLeftMotorPortOne(), MotorType.kBrushless);
+    this.LEFT_M_ONE = new CANSparkMax(Robot.ROBOTMAP.LeftMotorPortOne, MotorType.kBrushless);
+    this.LEFT_M_TWO = new CANSparkMax(Robot.ROBOTMAP.LeftMotorPortTwo, MotorType.kBrushless);
+    this.LEFT_M_THREE = new CANSparkMax(Robot.ROBOTMAP.LeftMotorPortThree, MotorType.kBrushless);
     
     //SPARK MAX RIGHT MOTORS
-    this.RIGHT_M_ONE = new CANSparkMax(Robot.ROBOTMAP.getRightMotorPortOne(), MotorType.kBrushless);
+    this.RIGHT_M_ONE = new CANSparkMax(Robot.ROBOTMAP.RightMotorPortOne, MotorType.kBrushless);
+    this.RIGHT_M_TWO = new CANSparkMax(Robot.ROBOTMAP.RightMotorPortTwo, MotorType.kBrushless);
+    this.RIGHT_M_THREE = new CANSparkMax(Robot.ROBOTMAP.RightMotorPortThree, MotorType.kBrushless);
+
 
     //SPEED CONTROLLER GROUPS
-    this.LEFT_M_GROUP = new MotorControllerGroup(this.LEFT_M_ONE);
-    this.RIGHT_M_GROUP = new MotorControllerGroup(this.RIGHT_M_ONE);
+    this.LEFT_M_GROUP = new MotorControllerGroup(this.LEFT_M_ONE, this.LEFT_M_TWO, this.LEFT_M_THREE);
+    this.RIGHT_M_GROUP = new MotorControllerGroup(this.RIGHT_M_ONE, this.RIGHT_M_TWO, this.RIGHT_M_THREE);
 
     //DIFFERENTIAL DRIVE
     this.DIFF_DRIVE = new DifferentialDrive(this.LEFT_M_GROUP, this.RIGHT_M_GROUP);
@@ -123,10 +134,19 @@ public class Drivetrain extends SubsystemBase
 
   public void configureMotors() {
     this.LEFT_M_ONE.restoreFactoryDefaults();
+    this.LEFT_M_TWO.restoreFactoryDefaults();
+    this.LEFT_M_THREE.restoreFactoryDefaults();
     this.RIGHT_M_ONE.restoreFactoryDefaults();
+    this.RIGHT_M_TWO.restoreFactoryDefaults();
+    this.RIGHT_M_THREE.restoreFactoryDefaults();
 
-    this.LEFT_M_ONE.setIdleMode(IdleMode.kCoast);
-    this.RIGHT_M_ONE.setIdleMode(IdleMode.kCoast);
+    this.LEFT_M_ONE.setIdleMode(IdleMode.kBrake);
+    this.LEFT_M_TWO.setIdleMode(IdleMode.kCoast);
+    this.LEFT_M_THREE.setIdleMode(IdleMode.kCoast);
+    this.RIGHT_M_ONE.setIdleMode(IdleMode.kBrake);
+    this.RIGHT_M_TWO.setIdleMode(IdleMode.kCoast);
+    this.RIGHT_M_THREE.setIdleMode(IdleMode.kCoast);
+
   }
 
 
