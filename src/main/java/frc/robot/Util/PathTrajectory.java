@@ -23,16 +23,20 @@ import java.util.ArrayList;
 public class PathTrajectory {
    
    String trajectoryJSON = "paths/PathtoBall1.wpilib.json";
-   Trajectory trajectory = new Trajectory();
    
    //on robot init
-   public void generateTrajectoryfromToolJson() {
+   public Trajectory generateTrajectoryfromToolJson(String path) {
+      
+      Trajectory trajectory = new Trajectory();
+      
       try {
-         Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
+         Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(path);
          trajectory =  TrajectoryUtil.fromPathweaverJson(trajectoryPath);
       } catch (IOException ex) {
          DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
       }
+
+      return trajectory;
    }
 
    //alternative Path for PathtoBall1 but with startpoint and inbetween points

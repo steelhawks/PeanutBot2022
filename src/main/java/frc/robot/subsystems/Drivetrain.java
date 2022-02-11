@@ -7,10 +7,14 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import frc.robot.Robot;
+
+import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 
 
 public class Drivetrain extends SubsystemBase
@@ -36,6 +40,10 @@ public class Drivetrain extends SubsystemBase
   private final AHRS GYRO;
   private final double KP_GYRO;
 
+  // Odometry class for tracking robot pose
+  private final DifferentialDriveOdometry m_odometry;
+
+
   //DRIVETRAIN CONSTRUCTOR
   public Drivetrain() 
   {
@@ -60,7 +68,9 @@ public class Drivetrain extends SubsystemBase
     this.shiftStatus = 1;
     this.rPMCoefficient = 1.75;
 
-    this.LEFT_M_ONE.setInverted(true);
+    m_odometry = new DifferentialDriveOdometry(GYRO.getRotation2d());
+
+    this.RIGHT_M_ONE.setInverted(true);
   }
 
   //DRIVING METHOD
@@ -87,6 +97,11 @@ public class Drivetrain extends SubsystemBase
       this.shiftStatus = 1;
       this.rPMCoefficient = 1.75;
     }
+  }
+
+  public Pose2d getGyroPosition(){
+    DifferentialDriveOdometry drivePosition = new DifferentialDriveOdometry(GYRO.getRotation2d());
+    return drivePosition.getPoseMeters();
   }
 
   //MOVING STRAIGHT USING THE GYRO METHOD
@@ -148,5 +163,33 @@ public class Drivetrain extends SubsystemBase
   {
     this.GYRO.reset();
     this.GYRO.zeroYaw();
+  }
+
+
+  //PATHWEAVER TESTING CODE TO GET ENCODER AND GYRO VALUES FROM DRIVETRAIN
+
+  @Override
+  public void periodic() {
+    // Update the odometry in the periodic block
+    m_odometry.update(
+        GYRO.getRotation2d(), m_leftEncoder.getDistance(), m_rightEncoder.getDistance());
+  }
+
+  /**
+   * Returns the heading of the robot.
+   *
+   * @return the robot's heading in degrees, from -180 to 180
+   */
+  public double getHeading() {
+    return GYRO.getRotation2d().getDegrees();
+  }
+
+    /**
+   * Returns the currently-estimated pose of the robot.
+   *
+   * @return The pose.
+   */
+  public Pose2d getPose() {
+    return m_odometry.getPoseMeters();
   }
 }

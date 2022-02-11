@@ -9,6 +9,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.Util.PathTrajectory;
 import frc.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj.AnalogInput;
 
@@ -20,6 +21,7 @@ public class Robot extends TimedRobot
   public static final RobotMap ROBOTMAP = new RobotMap();
   public static final Drivetrain DRIVETRAIN = new Drivetrain();
   public static final CommandLinker COMMAND_LINKER = new CommandLinker();
+  public static final PathTrajectory PATH_TRAJECTORY = new PathTrajectory();
   public double count = -0.99;
 
   //ultrasonic
