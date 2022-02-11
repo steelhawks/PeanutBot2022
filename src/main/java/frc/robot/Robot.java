@@ -11,14 +11,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.Drivetrain;
 
-import java.io.IOException;
-import java.nio.file.Path;
-
-import edu.wpi.first.math.trajectory.Trajectory;
-import edu.wpi.first.math.trajectory.TrajectoryUtil;
 import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.Filesystem;
 
 
 public class Robot extends TimedRobot 
@@ -34,9 +27,6 @@ public class Robot extends TimedRobot
   //ultrasonic
   final AnalogInput ultrasonic = new AnalogInput(0);
 
-  //pathweaver
-  public final String trajectoryJSON = "paths/Path1.wpilib.json"; //Name of json file
-  public Trajectory trajectory = new Trajectory();
   
 
   @Override
@@ -60,15 +50,6 @@ public class Robot extends TimedRobot
     //tab.add("currentDistanceInches", currentDistanceInches).getEntry();
     
     //ultrasonic testing
-
-    try {
-      Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
-      //This is where the trajectory is set
-      trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
-   } catch (IOException ex) {
-      DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
-   }
-
 
   }
 
