@@ -1,13 +1,13 @@
 
-package frc.robot.commands;
+package frc.robot.commands.intake;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.Robot;
 
-public class RetractSolenoid extends CommandBase {
+public class ExtendSolenoid extends CommandBase {
 
-  public RetractSolenoid(){
+  public ExtendSolenoid(){
     addRequirements(Robot.SOLENOID_TESTING);
   }
 
@@ -17,7 +17,7 @@ public class RetractSolenoid extends CommandBase {
 
   @Override
   public void execute() {
-    Robot.SOLENOID_TESTING.retractSolenoid();
+    Robot.SOLENOID_TESTING.extendSolenoid();
   }
 
   @Override

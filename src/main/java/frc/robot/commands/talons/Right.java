@@ -1,13 +1,13 @@
-package frc.robot.commands.Storage;
+package frc.robot.commands.talons;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.Robot;
 
-public class StorageStopUp extends CommandBase {
 
-  public StorageStopUp() {
-    addRequirements(Robot.INTAKETEST);
+public class Right extends CommandBase {
+  public Right() {
+    addRequirements(Robot.MOTOR_TESTING);
   }
 
   @Override
@@ -16,18 +16,19 @@ public class StorageStopUp extends CommandBase {
 
   @Override
   public void execute() {
-    Robot.INTAKETEST.stopDown();
+    Robot.MOTOR_TESTING.six(true);
+    Robot.MOTOR_TESTING.three(true);
   }
 
   @Override
   public boolean isFinished() {
-    return true;
+    return false;
   }
 
   @Override
   public void end(boolean interrupted) {
-    if (interrupted) {
-      Robot.INTAKETEST.stopClimb();
+    if(interrupted) {
+      Robot.MOTOR_TESTING.stop();
     }
   }
 }
