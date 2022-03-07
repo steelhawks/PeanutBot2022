@@ -1,4 +1,4 @@
-package frc.robot.commands.button;
+package frc.robot.commands.buttons;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;

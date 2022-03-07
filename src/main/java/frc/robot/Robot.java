@@ -7,6 +7,9 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.ButtonTesting;
@@ -27,12 +30,16 @@ public class Robot extends TimedRobot //BRIAN WAS HERE
   public static final ButtonTesting BUTTON_TESTING = new ButtonTesting();
   public static final SolenoidTesting SOLENOID_TESTING = new SolenoidTesting();
   public static final MotorTesting MOTOR_TESTING = new MotorTesting();
+  public static final Compressor compressor = new Compressor(PneumaticsModuleType.CTREPCM);    
+  
+  
 
   @Override
   public void robotInit() 
   {
     Robot.COMMAND_LINKER.configureRegisteredSubsystems();  
     Robot.COMMAND_LINKER.configureCommands();
+    compressor.disable();
   }
 
   @Override

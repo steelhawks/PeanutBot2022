@@ -4,11 +4,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.button.ButtonTest;
-import frc.robot.commands.intake.ExtendSolenoid;
-
-import frc.robot.commands.intake.RetractSolenoid;
-import frc.robot.commands.intake.ToggleSolenoid;
+import frc.robot.commands.buttons.*;
+import frc.robot.commands.solenoids.*;
 import frc.robot.commands.talons.*;
 
 
@@ -66,20 +63,17 @@ public class CommandLinker
     Button ALL_BUTTON = new JoystickButton(this.DRIVE_JOYSTICK, 1);
     Button REVERSE_ALL_BUTTON = new JoystickButton(this.DRIVE_JOYSTICK, 2);
 
-    LEFT_BUTTON.whileHeld(new Right());
-    REVERSE_LEFT_BUTTON.whileHeld(new RightReverse());
-    RIGHT_BUTTON.whileHeld(new Left());
-    REVERSE_RIGHT_BUTTON.whileHeld(new LeftReverse());
+    LEFT_BUTTON.whileHeld(new Left());
+    REVERSE_LEFT_BUTTON.whileHeld(new LeftReverse());
+    RIGHT_BUTTON.whileHeld(new Right());
+    REVERSE_RIGHT_BUTTON.whileHeld(new RightReverse());
     ALL_BUTTON.whileHeld(new All());
     REVERSE_ALL_BUTTON.whileHeld(new AllReverse());
 
     //Solenoids
     Button TOGGLE_SOLENOID = new JoystickButton(this.DRIVE_JOYSTICK, 10);
-    Button EXTEND_SOLENOID = new JoystickButton(this.DRIVE_JOYSTICK, 11);
-    Button RETRACT_SOLENOID = new JoystickButton(this.DRIVE_JOYSTICK, 12);
 
     TOGGLE_SOLENOID.whenPressed(new ToggleSolenoid());
-    EXTEND_SOLENOID.whenPressed(new ExtendSolenoid());
-    RETRACT_SOLENOID.whenPressed(new RetractSolenoid());
+
   }
 }

@@ -14,10 +14,10 @@ public class RobotMap
    *****/
 
   //Motor IDs
-  private final int TALON_ID_TWO = 2;
-  private final int TALON_ID_FOURTEEN = 14;
-  private final int TALON_ID_SIX = 6; 
-  private final int TALON_ID_THREE = 3;
+  private final int TALON_ONE_ID = 2;
+  private final int TALON_TWO_ID = 14;
+  private final int TALON_THREE_ID = 6; 
+  private final int TALON_FOUR_ID = 3;
 
   //Motor Speed
   private final double motorSpeed = 1;
@@ -37,20 +37,20 @@ public class RobotMap
     return this.JOYSTICK_PORT_ONE;
   }
 
-  public int getTalonIdTwo() {
-    return this.TALON_ID_TWO;
+  public int getTalonOneId() {
+    return this.TALON_ONE_ID;
   }
 
-  public int getTalonIdFourteen() {
-    return this.TALON_ID_FOURTEEN;
+  public int getTalonTwoId() {
+    return this.TALON_TWO_ID;
   }
 
-  public int getTalonIdSix() {
-    return this.TALON_ID_SIX;
+  public int getTalonThreeId() {
+    return this.TALON_THREE_ID;
   }
 
-  public int getTalonIdThree() {
-    return this.TALON_ID_THREE;
+  public int getTalonFourId() {
+    return this.TALON_FOUR_ID;
   }
 
   public double getMotorSpeed() {
