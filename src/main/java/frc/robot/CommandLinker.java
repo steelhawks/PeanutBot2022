@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.buttons.*;
 import frc.robot.commands.solenoids.*;
 import frc.robot.commands.talons.*;
+import frc.robot.subsystems.EncoderTesting;
 
 
 public class CommandLinker 
@@ -42,18 +43,19 @@ public class CommandLinker
     Button eleven = new JoystickButton(this.DRIVE_JOYSTICK, 11);
     Button twelve = new JoystickButton(this.DRIVE_JOYSTICK, 12);
 
-    one.whileHeld(new ButtonTest(1));
-    two.whileHeld(new ButtonTest(2));
-    three.whileHeld(new ButtonTest(3));
-    four.whileHeld(new ButtonTest(4));
-    five.whileHeld(new ButtonTest(5));
-    six.whileHeld(new ButtonTest(6));
-    seven.whileHeld(new ButtonTest(7));
-    eight.whileHeld(new ButtonTest(8));
-    nine.whileHeld(new ButtonTest(9));
-    ten.whileHeld(new ButtonTest(10));
-    eleven.whileHeld(new ButtonTest(11));
-    twelve.whileHeld(new ButtonTest(12));
+    // one.whileHeld(new ButtonTest(1));
+    // two.whileHeld(new ButtonTest(2));
+    // three.whileHeld(new ButtonTest(3));
+    // four.whileHeld(new ButtonTest(4));
+    // five.whileHeld(new ButtonTest(5));
+    // six.whileHeld(new ButtonTest(6));
+    // seven.whileHeld(new ButtonTest(7));
+    // eight.whileHeld(new ButtonTest(8));
+    // nine.whileHeld(new ButtonTest(9));
+    // ten.whileHeld(new ButtonTest(10));
+    // eleven.whileHeld(new ButtonTest(11));
+    // twelve.whileHeld(new ButtonTest(12));
+    one.whileHeld(new EncoderComm());
    
     //Talons
     Button LEFT_BUTTON = new JoystickButton(this.DRIVE_JOYSTICK, 5);

@@ -12,7 +12,9 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.commands.talons.EncoderComm;
 import frc.robot.subsystems.ButtonTesting;
+import frc.robot.subsystems.EncoderTesting;
 import frc.robot.subsystems.MotorTesting;
 import frc.robot.subsystems.SolenoidTesting;
 
@@ -30,23 +32,27 @@ public class Robot extends TimedRobot //BRIAN WAS HERE
   public static final ButtonTesting BUTTON_TESTING = new ButtonTesting();
   public static final SolenoidTesting SOLENOID_TESTING = new SolenoidTesting();
   public static final MotorTesting MOTOR_TESTING = new MotorTesting();
-  public static final Compressor compressor = new Compressor(PneumaticsModuleType.CTREPCM);    
+  public static final EncoderTesting ENCODER_TESTING = new EncoderTesting();
+  // public static final Compressor compressor = new Compressor(PneumaticsModuleType.CTREPCM);    
   
-  
-
   @Override
   public void robotInit() 
-  {
+  { 
     Robot.COMMAND_LINKER.configureRegisteredSubsystems();  
     Robot.COMMAND_LINKER.configureCommands();
-    compressor.disable();
+    //System.out.println(compressor.enabled());
+    //compressor.disable();
   }
 
   @Override
-  public void robotPeriodic() {}
+  public void robotPeriodic() {
+    Robot.ENCODER_TESTING.shuffleBoard();
+  }
 
   @Override
-  public void disabledInit() {}
+  public void disabledInit() {
+    Robot.ENCODER_TESTING.resetEncoder();
+  }
 
   @Override
   public void disabledPeriodic() {}
