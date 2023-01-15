@@ -164,7 +164,6 @@ public class Robot extends TimedRobot
     SmartDashboard.putNumber("Confidence", match.confidence);
     SmartDashboard.putString("Detected Color", colorString);
     */
-
     COLOR_SENSOR.detectColor();
     COLOR_SENSOR.updatecolortable();
   }

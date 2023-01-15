@@ -3,13 +3,17 @@ package frc.robot.subsystems;
 
 import com.kauailabs.navx.frc.AHRS;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.sensors.Pigeon2;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
 
@@ -33,8 +37,7 @@ public class Drivetrain extends SubsystemBase
   public double rPMCoefficient;
 
   //NAVX MXP GYRO
-  private final AHRS GYRO;
-  private final double KP_GYRO;
+  private final Pigeon2 gyro;
 
   //DRIVETRAIN CONSTRUCTOR
   public Drivetrain() 
@@ -53,8 +56,7 @@ public class Drivetrain extends SubsystemBase
     this.DIFF_DRIVE = new DifferentialDrive(this.LEFT_M_GROUP, this.RIGHT_M_GROUP);
 
     //NAVX MXP GYRO
-    this.GYRO = new AHRS(SPI.Port.kMXP);
-    this.KP_GYRO = Robot.ROBOTMAP.getKPGyro();
+    this.gyro = new Pigeon2(5, "rio");
 
     //VARIABLE RPM ELECTRO-SHIFT
     this.shiftStatus = 1;
@@ -90,13 +92,13 @@ public class Drivetrain extends SubsystemBase
   //MOVING STRAIGHT USING THE GYRO METHOD
   public void gyroMoveStraight(double speed)
   {
-    this.DIFF_DRIVE.arcadeDrive(speed, -this.GYRO.getAngle() * this.KP_GYRO);
+    this.DIFF_DRIVE.arcadeDrive(speed, -this.gyro.getYaw());
   }
 
   //MOVING STRAIGHT USING GYRO AND ANGLE VALUE METHOD
   public void gyroMoveStraight(double speed, double angle)
   {
-    this.DIFF_DRIVE.arcadeDrive(-speed, -angle * this.KP_GYRO);
+    this.DIFF_DRIVE.arcadeDrive(-speed, -angle);
   }
 
   //ROTATE ROBOT
@@ -127,24 +129,24 @@ public class Drivetrain extends SubsystemBase
   }
 
 
-  public AHRS getGyro()
+  public Pigeon2 getGyro()
   {
-    return this.GYRO;
-  }
-
-  public double getGyroAngle() 
-  {
-    return this.GYRO.getAngle(); 
-  }
-
-  public double getGyroAxis() 
-  {
-    return this.GYRO.getBoardYawAxis().board_axis.getValue();
+    return this.gyro;
   }
 
   public void resetGyro() 
   {
-    this.GYRO.reset();
-    this.GYRO.zeroYaw();
+    this.gyro.setYaw(0);
   }
+
+  @Override
+  public void periodic() {
+    // SmartDashboard.putNumber("Yaw", getGyro().getYaw());
+    // NetworkTableEntry entry = Shuffleboard.getTab("SmartDashboard")
+    //   .add("Yaw", gyro.getYaw())
+    //   .getEntry();
+    // Shuffleboard.update();
+    System.out.println(gyro.getYaw());
+  }
+
 }
