@@ -28,7 +28,7 @@ public class CommandLinker
 
 
     SHIFT_BUTTON.whenPressed(new ShiftGear());
-    ZERO_GYRO.whenPressed(new InstantCommand(() -> Robot.DRIVETRAIN.resetGyro()));
+    ZERO_GYRO.whenPressed(new ZeroGyro());
 
     CommandScheduler.getInstance().setDefaultCommand(Robot.DRIVETRAIN, new DiffDrive());
   }

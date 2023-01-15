@@ -56,7 +56,7 @@ public class Drivetrain extends SubsystemBase
     this.DIFF_DRIVE = new DifferentialDrive(this.LEFT_M_GROUP, this.RIGHT_M_GROUP);
 
     //NAVX MXP GYRO
-    this.gyro = new Pigeon2(5, "rio");
+    this.gyro = new Pigeon2(5);
 
     //VARIABLE RPM ELECTRO-SHIFT
     this.shiftStatus = 1;
@@ -137,6 +137,7 @@ public class Drivetrain extends SubsystemBase
   public void resetGyro() 
   {
     this.gyro.setYaw(0);
+    System.out.println("RESET GYROOOOOO");
   }
 
   @Override
@@ -146,7 +147,7 @@ public class Drivetrain extends SubsystemBase
     //   .add("Yaw", gyro.getYaw())
     //   .getEntry();
     // Shuffleboard.update();
-    System.out.println(gyro.getYaw());
+    //System.out.println(gyro.getYaw());
   }
 
 }

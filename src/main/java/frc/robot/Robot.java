@@ -166,6 +166,7 @@ public class Robot extends TimedRobot
     */
     COLOR_SENSOR.detectColor();
     COLOR_SENSOR.updatecolortable();
+    System.out.println(DRIVETRAIN.getGyro().getPitch());
   }
 
   @Override
