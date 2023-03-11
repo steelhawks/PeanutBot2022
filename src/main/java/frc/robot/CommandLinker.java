@@ -72,8 +72,13 @@ public class CommandLinker
 
     //Solenoids
     Button TOGGLE_SOLENOID = new JoystickButton(this.DRIVE_JOYSTICK, 10);
+    Button TOGGLE_SOL_ONE = new JoystickButton(this.DRIVE_JOYSTICK, 12);
+    Button TOGGLE_SOL_TWO = new JoystickButton(this.DRIVE_JOYSTICK, 11);
+    // Button TOGGLE_SOL_THREE = new JoystickButton(this.DRIVE_JOYSTICK, 12);
 
     TOGGLE_SOLENOID.whenPressed(new ToggleSolenoid());
+    TOGGLE_SOL_ONE.whenPressed(new ToggleSolOne());
+    TOGGLE_SOL_TWO.whenPressed(new ToggleSolTwo());
 
   }
 }

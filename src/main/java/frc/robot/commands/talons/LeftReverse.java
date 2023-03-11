@@ -14,8 +14,8 @@ public class LeftReverse extends CommandBase {
 
   @Override
   public void execute() {
+    Robot.MOTOR_TESTING.one(false);
     Robot.MOTOR_TESTING.two(false);
-    Robot.MOTOR_TESTING.fourteen(false);
   }
 
   @Override

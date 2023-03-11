@@ -14,16 +14,22 @@ public class RobotMap
    *****/
 
   //Motor IDs
-  private final int TALON_ONE_ID = 2;
+  private final int TALON_ONE_ID = 16;
   private final int TALON_TWO_ID = 14;
-  private final int TALON_THREE_ID = 6; 
-  private final int TALON_FOUR_ID = 3;
+  private final int TALON_THREE_ID = 12; 
+  private final int TALON_FOUR_ID = 13;
+  private final int VICTOR_ONE_ID = 1;
 
   //Motor Speed
-  private final double motorSpeed = 1;
+  private final double motorSpeed = 0.3;
   
   //Joystick Port
-  private final int JOYSTICK_PORT_ONE = 0; 
+  private final int JOYSTICK_PORT_ONE = 0;
+
+  //Limit Switch Port
+  public final int LIMIT_SWITCH_ONE_PORT = 9;
+
+  public final int RELEASE_SWITCH_BUTTON = 7;
 
   /*****
    * Constructor methods
@@ -56,4 +62,9 @@ public class RobotMap
   public double getMotorSpeed() {
     return this.motorSpeed;
   }
+
+  public int getVictorOneId() {
+    return this.VICTOR_ONE_ID;
+  }
+
 }

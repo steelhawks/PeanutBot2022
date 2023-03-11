@@ -14,10 +14,11 @@ public class AllReverse extends CommandBase {
 
   @Override
   public void execute() {
+    Robot.MOTOR_TESTING.one(false);
     Robot.MOTOR_TESTING.two(false);
-    Robot.MOTOR_TESTING.fourteen(false);
-    Robot.MOTOR_TESTING.six(false);
     Robot.MOTOR_TESTING.three(false);
+    Robot.MOTOR_TESTING.four(false);
+    Robot.MOTOR_TESTING.five(false);
   }
 
   @Override

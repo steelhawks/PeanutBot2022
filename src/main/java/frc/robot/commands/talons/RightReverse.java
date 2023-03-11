@@ -16,8 +16,8 @@ public class RightReverse extends CommandBase {
 
   @Override
   public void execute() {
-    Robot.MOTOR_TESTING.six(false);
     Robot.MOTOR_TESTING.three(false);
+    Robot.MOTOR_TESTING.four(false);
   }
 
   @Override

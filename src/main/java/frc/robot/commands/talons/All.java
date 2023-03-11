@@ -14,10 +14,11 @@ public class All extends CommandBase {
 
   @Override
   public void execute() {
+    Robot.MOTOR_TESTING.one(true);
     Robot.MOTOR_TESTING.two(true);
-    Robot.MOTOR_TESTING.fourteen(true);
-    Robot.MOTOR_TESTING.six(true);
     Robot.MOTOR_TESTING.three(true);
+    Robot.MOTOR_TESTING.four(true);
+    Robot.MOTOR_TESTING.five(true);
   }
 
   @Override

@@ -17,7 +17,7 @@ import frc.robot.subsystems.MotorTesting;
 import frc.robot.subsystems.SolenoidTesting;
 
 
-public class Robot extends TimedRobot //BRIAN WAS HERE
+public class Robot extends TimedRobot
 {
   /*****
    * Robot Objects
@@ -30,16 +30,15 @@ public class Robot extends TimedRobot //BRIAN WAS HERE
   public static final ButtonTesting BUTTON_TESTING = new ButtonTesting();
   public static final SolenoidTesting SOLENOID_TESTING = new SolenoidTesting();
   public static final MotorTesting MOTOR_TESTING = new MotorTesting();
-  public static final Compressor compressor = new Compressor(PneumaticsModuleType.CTREPCM);    
+  public static final Compressor compressor = new Compressor(PneumaticsModuleType.REVPH);    
   
   
-
   @Override
   public void robotInit() 
   {
     Robot.COMMAND_LINKER.configureRegisteredSubsystems();  
     Robot.COMMAND_LINKER.configureCommands();
-    compressor.disable();
+    // compressor.disable();
   }
 
   @Override
@@ -69,7 +68,7 @@ public class Robot extends TimedRobot //BRIAN WAS HERE
   public void teleopPeriodic() 
   {
     CommandScheduler.getInstance().run();
-
+    // SOLENOID_TESTING.triggerPistonIfHit();
   }
 
   @Override

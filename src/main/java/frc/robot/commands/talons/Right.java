@@ -16,8 +16,8 @@ public class Right extends CommandBase {
 
   @Override
   public void execute() {
-    Robot.MOTOR_TESTING.six(true);
     Robot.MOTOR_TESTING.three(true);
+    Robot.MOTOR_TESTING.four(true);
   }
 
   @Override
